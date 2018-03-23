@@ -14,10 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import hk.ust.cse.comp4521.a4521template.R;
+import hk.ust.cse.comp4521.a4521template.card.Manager;
 
 public class StartPage extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
+    private Manager manager;
 
 
 
@@ -68,6 +70,7 @@ public class StartPage extends AppCompatActivity {
         }
 
         //TODO  main page
+        manager = new Manager();
 
 
     }

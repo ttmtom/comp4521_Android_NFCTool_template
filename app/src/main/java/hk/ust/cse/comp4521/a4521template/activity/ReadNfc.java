@@ -33,12 +33,12 @@ public class ReadNfc extends AppCompatActivity {
         super.onResume();
         nfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
 
-
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
 
         }
         else if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(getIntent().getAction())){
             // TODO  creat new card
+            Tag tag =
         }
     }
 
