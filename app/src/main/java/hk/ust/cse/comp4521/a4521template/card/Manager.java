@@ -1,5 +1,6 @@
 package hk.ust.cse.comp4521.a4521template.card;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by TM on 23-Mar-18.
  */
 
-public class Manager {
+public class Manager implements Serializable {
     private List<Card> cards;
 
     public Manager(){

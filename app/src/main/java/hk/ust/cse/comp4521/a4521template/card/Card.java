@@ -18,6 +18,7 @@ public class Card {
     private List<Action> turnOffActions;
     private byte[] tagID;
     private Image cardImage;
+    private boolean activate;
 
     public Card(){
         turnOnActions = new ArrayList<Action>();
@@ -32,6 +33,8 @@ public class Card {
         this.cardImage = cardImage;
         turnOnActions = new ArrayList<Action>();
         turnOffActions = new ArrayList<Action>();
+        activate = false;
+
     }
 
     public void addTurnOnActions(){
@@ -45,6 +48,17 @@ public class Card {
         //turnOffActions.add();
     }
 
+    public void cardOn(){
+        for(Action a:turnOnActions)
+            a.turnOn();
+        activate = true;
+    }
+
+    public void cardOff(){
+        for(Action a: turnOffActions)
+            a.turnOff();
+        activate = false;
+    }
 
     public void setCardName(String cardName){
         this.cardName = cardName;

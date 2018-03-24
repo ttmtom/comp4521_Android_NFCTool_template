@@ -8,7 +8,7 @@ import android.media.AudioManager;
  * Created by TM on 23-Mar-18.
  */
 
-public class SoundModeAction extends Activity implements Action{
+public class SoundModeAction extends Action{
     @Override
     public void turnOn() {
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);

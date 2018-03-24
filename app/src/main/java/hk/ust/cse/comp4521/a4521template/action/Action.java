@@ -1,11 +1,12 @@
 package hk.ust.cse.comp4521.a4521template.action;
 
+import android.app.Activity;
+
 /**
  * Created by TM on 23-Mar-18.
  */
 
-public interface Action {
-
-    void turnOn();
-    void turnOff();
+public abstract class Action extends Activity{
+    public abstract void turnOn();
+    public abstract void turnOff();
 }

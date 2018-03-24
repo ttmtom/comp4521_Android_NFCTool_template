@@ -1,20 +1,20 @@
 package hk.ust.cse.comp4521.a4521template.activity;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import hk.ust.cse.comp4521.a4521template.R;
 
-public class ReadNfc extends AppCompatActivity {
+public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
 
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
+    byte[] cardID;
 
 
     @Override
@@ -37,8 +37,8 @@ public class ReadNfc extends AppCompatActivity {
 
         }
         else if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(getIntent().getAction())){
-            // TODO  creat new card
-            Tag tag =
+            // TODO   show next button
+
         }
     }
 
@@ -50,5 +50,15 @@ public class ReadNfc extends AppCompatActivity {
     @Override
     public void onNewIntent(Intent intent) {
         setIntent(intent);
+    }
+
+    @Override
+    public  void onClick(View v){
+        Tag tag = getIntent().getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        cardID = tag.getId();
+        Intent intent = new Intent(getBaseContext(), CreateCard.class);
+        intent.putExtra("cardID", cardID);
+        intent.putExtra("manager", intent.getSerializableExtra("manager"));
+        startActivity(intent);
     }
 }

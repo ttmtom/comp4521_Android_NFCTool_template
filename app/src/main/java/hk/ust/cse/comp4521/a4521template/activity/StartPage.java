@@ -13,15 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.io.Serializable;
+
 import hk.ust.cse.comp4521.a4521template.R;
 import hk.ust.cse.comp4521.a4521template.card.Manager;
 
-public class StartPage extends AppCompatActivity {
+public class StartPage extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     private NfcAdapter nfcAdapter;
     private Manager manager;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,7 @@ public class StartPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //TODO  add new card, import, export button
             }
         });
 
@@ -72,7 +71,35 @@ public class StartPage extends AppCompatActivity {
         //TODO  main page
         manager = new Manager();
 
+        //1. show list
+        //2. wait for click action
 
+
+
+    }
+
+    @Override
+    public void onClick(View v){
+        // from long click
+        manager.removeCard("test");
+
+
+
+        // from FloatingActionButton
+        // 1. add  new card
+        Intent intent = new Intent(getBaseContext(), ReadNfc.class);
+        intent.putExtra("manger", manager);
+        startActivity(intent);
+        //2. import FileChooser
+
+        //3. export Serializable
+
+    }
+
+    @Override
+    public boolean onLongClick(View v){
+        // show remove, edit button
+        return true;
     }
 
 }
