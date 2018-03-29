@@ -8,7 +8,7 @@ import android.net.wifi.WifiManager;
  * Created by TM on 23-Mar-18.
  */
 
-public class WifiActionOn  extends Action{
+public class WifiAction extends Action{
     @Override
     public void turnOn(){
         WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);

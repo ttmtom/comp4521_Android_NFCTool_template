@@ -1,5 +1,7 @@
 package hk.ust.cse.comp4521.a4521template.card;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,27 +11,66 @@ import java.util.List;
  */
 
 public class Manager implements Serializable {
-    private List<Card> cards;
+    private ArrayList<Card> cards;
+    boolean anyModeOn;
 
     public Manager(){
-        cards = new ArrayList<Card>();
+
+        cards = new ArrayList<>();
+        anyModeOn = false;
     }
 
-    public void addCard(){
+    public void addCard(Card temp){
         //TODO
-        cards.add(new Card());
+        cards.add(temp);
     }
 
     public void removeCard(String name){
-        //TODO
+        for(int i = 0; i < cards.size(); i++){
+            if(cards.get(i).getCardName().equals(name)) {
+                cards.remove(i);
+                return;
+            }
+        }
+    }
+
+    public void restore(){
 
     }
 
-    public int getCardsNum(){
+    public void export(){
+
+    }
+
+    public void importData(){
+
+    }
+
+    public void runCard(String name){
+        for(int i = 0; i < cards.size(); i++){
+            if(cards.get(i).getCardName().equals(name)) {
+                cards.get(i).cardOn();
+                anyModeOn = true;
+            }
+        }
+    }
+/*
+    public void turnOff(){
+        for(Card c: cards)
+            if(c.isActivate()) {
+                c.cardOff();
+                anyModeOn = false;
+                return;
+            }
+    }
+    */
+
+
+    public int getCardsSize(){
         return cards.size();
     }
 
-    public  List<Card> getCards(){
+    public  ArrayList<Card> getCards(){
         return cards;
     }
 }

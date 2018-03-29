@@ -2,6 +2,7 @@ package hk.ust.cse.comp4521.a4521template.card;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,19 +12,17 @@ import hk.ust.cse.comp4521.a4521template.action.Action;
  * Created by TM on 23-Mar-18.
  */
 
-public class Card {
+public class Card implements Serializable{
     private String cardName;
     private String cardTag;
-    private List<Action> turnOnActions;
-    private List<Action> turnOffActions;
+    private ArrayList<Action> turnOnActions;
     private byte[] tagID;
     private Image cardImage;
-    private boolean activate;
+    private boolean isActivate;
+    private boolean[] actionSetting;
 
     public Card(){
-        turnOnActions = new ArrayList<Action>();
-        turnOffActions = new ArrayList<Action>();
-
+        turnOnActions = new ArrayList<>();
     }
 
     public Card(String cardName, String cardTag, byte[] tagID, Image cardImage){
@@ -31,34 +30,17 @@ public class Card {
         this.cardTag = cardTag;
         this.tagID = tagID;
         this.cardImage = cardImage;
-        turnOnActions = new ArrayList<Action>();
-        turnOffActions = new ArrayList<Action>();
-        activate = false;
+        turnOnActions = new ArrayList<>();
+        isActivate = false;
 
-    }
-
-    public void addTurnOnActions(){
-        //TODO
-        //turnOnActions.add();
-    }
-
-
-    public void addTurnOffActions(){
-        //TODO
-        //turnOffActions.add();
     }
 
     public void cardOn(){
-        for(Action a:turnOnActions)
+        for(Action a :turnOnActions)
             a.turnOn();
-        activate = true;
+        isActivate = true;
     }
 
-    public void cardOff(){
-        for(Action a: turnOffActions)
-            a.turnOff();
-        activate = false;
-    }
 
     public void setCardName(String cardName){
         this.cardName = cardName;
@@ -80,12 +62,13 @@ public class Card {
         return tagID;
     }
 
-    public List<Action> getTurnOnActions(){
+    public boolean isActivate(){
+        return isActivate;
+    }
+
+    public ArrayList<Action> getTurnOnActions(){
         return turnOnActions;
     }
 
-    public List<Action> getTurnOffActions(){
-        return turnOffActions;
-    }
 
 }

@@ -5,5 +5,6 @@ package hk.ust.cse.comp4521.a4521template.action;
  */
 
 public class ActionList {
-    public static final String[] ACTION_LIST = {"WifiAction", "SoundModeAction"};
+    public static final String[] ACTION_LIST = {"WifiAction", "SoundModeAction", "BluetoothAction"};
+
 }

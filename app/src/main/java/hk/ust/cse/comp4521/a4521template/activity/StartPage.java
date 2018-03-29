@@ -17,8 +17,9 @@ import java.io.Serializable;
 
 import hk.ust.cse.comp4521.a4521template.R;
 import hk.ust.cse.comp4521.a4521template.card.Manager;
+import hk.ust.cse.comp4521.a4521template.service.ReadCardService;
 
-public class StartPage extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+public class StartPage extends AppCompatActivity implements View.OnClickListener{
 
     private NfcAdapter nfcAdapter;
     private Manager manager;
@@ -35,6 +36,8 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View view) {
                 //TODO  add new card, import, export button
+
+
             }
         });
 
@@ -42,7 +45,7 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (nfcAdapter == null) {
-            new AlertDialog.Builder(this).setTitle("Error").setMessage("Your device not support NFC")
+            new AlertDialog.Builder(this).setTitle("Error").setMessage("This device does not support AR NFC.")
                     .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -50,7 +53,7 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
                         }
                     }).show();
         } else if (!nfcAdapter.isEnabled()) {
-            new AlertDialog.Builder(this).setTitle("Error").setMessage("NFC is disable, Pls turn on NFC")
+            new AlertDialog.Builder(this).setTitle("Error").setMessage("NFC is disable, Pls turn on.")
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -70,36 +73,51 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
 
         //TODO  main page
         manager = new Manager();
+        //1. load past data
+        manager.restore();
 
-        //1. show list
-        //2. wait for click action
+        //2. show list
+        //3. wait for click action
 
 
+        Intent readCardIntent = new Intent(this, ReadCardService.class);
+        readCardIntent.putExtra("manager", manager);
+        startService(readCardIntent);
 
     }
 
     @Override
     public void onClick(View v){
-        // from long click
-        manager.removeCard("test");
-
-
-
+        /**TODO add if condition
+                * 1. click on list view show button : remove , edit card name, edit card tag
+                */
+        //2. remove
+        new AlertDialog.Builder(this).setTitle("Remove card").setMessage("Warming: you are going to remove a card.")
+                .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // TODO get list name
+                        manager.removeCard("temp");
+                    }
+                }).show();
+/**
+*        TODO pop-up input dialog (edit card name and card tag)
+*       https://developer.android.com/guide/topics/ui/dialogs.html
+*       Creating a Custom Layout: one  text input, cancel and ok button and call manager.setName(String) and manager.setTag(String)
+*/
         // from FloatingActionButton
-        // 1. add  new card
+        // 1. add new card
         Intent intent = new Intent(getBaseContext(), ReadNfc.class);
         intent.putExtra("manger", manager);
         startActivity(intent);
-        //2. import FileChooser
 
-        //3. export Serializable
+        //2. import
+        manager.importData();
+
+        //3. export
+        manager.export();
 
     }
 
-    @Override
-    public boolean onLongClick(View v){
-        // show remove, edit button
-        return true;
-    }
 
 }

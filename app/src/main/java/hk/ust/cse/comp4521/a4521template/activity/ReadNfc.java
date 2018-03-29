@@ -9,12 +9,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import hk.ust.cse.comp4521.a4521template.R;
+import hk.ust.cse.comp4521.a4521template.card.Card;
+import hk.ust.cse.comp4521.a4521template.card.Manager;
 
 public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
 
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     byte[] cardID;
+
+    Intent intent = new Intent(getBaseContext(), CreateCard.class);
+    Manager manager = (Manager) intent.getSerializableExtra("manager");
 
 
     @Override
@@ -37,8 +42,20 @@ public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
 
         }
         else if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(getIntent().getAction())){
-            // TODO   show next button
+            // check the id
+            Tag tag = getIntent().getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            cardID = tag.getId();
+            for(Card c : manager.getCards()) {
+                // check the card already added
+                if (c.getTagID().equals(cardID)){
+                    //TODO show message and do nothing
 
+                    return;
+                }
+            }
+
+            //new id
+            //TODO show button and ID
         }
     }
 
@@ -54,11 +71,9 @@ public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public  void onClick(View v){
-        Tag tag = getIntent().getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        cardID = tag.getId();
-        Intent intent = new Intent(getBaseContext(), CreateCard.class);
+        //TODO
         intent.putExtra("cardID", cardID);
-        intent.putExtra("manager", intent.getSerializableExtra("manager"));
+        intent.putExtra("manager",manager);
         startActivity(intent);
     }
 }
