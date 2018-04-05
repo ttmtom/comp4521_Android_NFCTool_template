@@ -7,7 +7,11 @@ import android.app.Activity;
  */
 
 public abstract class Action extends Activity{
-    private boolean startAction;
+    private boolean startSetting;
     public abstract void turnOn();
     public abstract void turnOff();
+
+    public Action(boolean startSetting){
+       this.startSetting = startSetting;
+    }
 }

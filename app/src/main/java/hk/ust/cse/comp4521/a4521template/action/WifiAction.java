@@ -9,6 +9,10 @@ import android.net.wifi.WifiManager;
  */
 
 public class WifiAction extends Action{
+    public WifiAction(boolean startSetting){
+        super(startSetting);
+    }
+
     @Override
     public void turnOn(){
         WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);

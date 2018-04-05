@@ -8,12 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import java.io.Serializable;
 
 import hk.ust.cse.comp4521.a4521template.R;
 import hk.ust.cse.comp4521.a4521template.card.Manager;
@@ -35,7 +32,7 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO  add new card, import, export button
+                //TODO  add new card, data mange
 
 
             }
@@ -105,17 +102,20 @@ public class StartPage extends AppCompatActivity implements View.OnClickListener
 *       https://developer.android.com/guide/topics/ui/dialogs.html
 *       Creating a Custom Layout: one  text input, cancel and ok button and call manager.setName(String) and manager.setTag(String)
 */
+
+
+
         // from FloatingActionButton
         // 1. add new card
+
         Intent intent = new Intent(getBaseContext(), ReadNfc.class);
         intent.putExtra("manger", manager);
         startActivity(intent);
 
-        //2. import
-        manager.importData();
-
-        //3. export
-        manager.export();
+        //2. Data Manager
+        intent = new Intent(getBaseContext(), DataManage.class);
+        intent.putExtra("manger", manager);
+        startActivity(intent);
 
     }
 

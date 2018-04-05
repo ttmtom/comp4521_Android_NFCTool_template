@@ -16,9 +16,9 @@ public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
 
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
-    byte[] cardID;
+    private byte[] cardID;
 
-    Intent intent = new Intent(getBaseContext(), CreateCard.class);
+    Intent intent = new Intent(getBaseContext(), StartPage.class);
     Manager manager = (Manager) intent.getSerializableExtra("manager");
 
 
@@ -47,7 +47,7 @@ public class ReadNfc extends AppCompatActivity implements View.OnClickListener{
             cardID = tag.getId();
             for(Card c : manager.getCards()) {
                 // check the card already added
-                if (c.getTagID().equals(cardID)){
+                if (c.getCardID().equals(cardID)){
                     //TODO show message and do nothing
 
                     return;

@@ -10,12 +10,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
-    <service android:name=".readCard"/>
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +25,8 @@
             android:label="@string/title_activity_start_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ReadNfc" />
-        <activity android:name=".activity.CreateCard"></activity>
+        <activity android:name=".activity.CreateCard" />
+        <activity android:name=".activity.DataManage"></activity>
     </application>
 
 </manifest>

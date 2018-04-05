@@ -7,6 +7,9 @@ import android.bluetooth.BluetoothAdapter;
  */
 
 public class BluetoothAction extends Action {
+    public BluetoothAction(boolean startSetting){
+        super(startSetting);
+    }
     @Override
     public void turnOn() {
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

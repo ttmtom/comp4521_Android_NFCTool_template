@@ -15,8 +15,8 @@ import hk.ust.cse.comp4521.a4521template.action.Action;
 public class Card implements Serializable{
     private String cardName;
     private String cardTag;
-    private ArrayList<Action> turnOnActions;
-    private byte[] tagID;
+    private List<Action> turnOnActions;
+    private byte[] cardID;
     private Image cardImage;
     private boolean isActivate;
     private boolean[] actionSetting;
@@ -28,14 +28,13 @@ public class Card implements Serializable{
     public Card(String cardName, String cardTag, byte[] tagID, Image cardImage){
         this.cardName = cardName;
         this.cardTag = cardTag;
-        this.tagID = tagID;
+        this.cardID = tagID;
         this.cardImage = cardImage;
         turnOnActions = new ArrayList<>();
         isActivate = false;
-
     }
 
-    public void cardOn(){
+    public void cardTurnOn(){
         for(Action a :turnOnActions)
             a.turnOn();
         isActivate = true;
@@ -58,15 +57,15 @@ public class Card implements Serializable{
         return cardTag;
     }
 
-    public byte[] getTagID(){
-        return tagID;
+    public byte[] getCardID(){
+        return cardID;
     }
 
     public boolean isActivate(){
         return isActivate;
     }
 
-    public ArrayList<Action> getTurnOnActions(){
+    public List<Action> getTurnOnActions(){
         return turnOnActions;
     }
 

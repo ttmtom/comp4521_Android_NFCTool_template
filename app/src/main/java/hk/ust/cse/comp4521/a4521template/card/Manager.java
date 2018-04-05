@@ -1,7 +1,5 @@
 package hk.ust.cse.comp4521.a4521template.card;
 
-import android.content.Intent;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +9,8 @@ import java.util.List;
  */
 
 public class Manager implements Serializable {
-    private ArrayList<Card> cards;
-    boolean anyModeOn;
+    private List<Card> cards;
+    private boolean anyModeOn;
 
     public Manager(){
 
@@ -25,13 +23,14 @@ public class Manager implements Serializable {
         cards.add(temp);
     }
 
-    public void removeCard(String name){
+    public boolean removeCard(String name){
         for(int i = 0; i < cards.size(); i++){
             if(cards.get(i).getCardName().equals(name)) {
                 cards.remove(i);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public void restore(){
@@ -46,11 +45,21 @@ public class Manager implements Serializable {
 
     }
 
-    public void runCard(String name){
+    public boolean runACard(String name){
         for(int i = 0; i < cards.size(); i++){
             if(cards.get(i).getCardName().equals(name)) {
-                cards.get(i).cardOn();
+                cards.get(i).cardTurnOn();
                 anyModeOn = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void turnOffCard(){
+        for(Card c: cards){
+            if(c.isActivate()){
+
             }
         }
     }
@@ -65,12 +74,15 @@ public class Manager implements Serializable {
     }
     */
 
+    public boolean isAnyModeOn(){
+        return anyModeOn;
+    }
 
     public int getCardsSize(){
         return cards.size();
     }
 
-    public  ArrayList<Card> getCards(){
+    public  List<Card> getCards(){
         return cards;
     }
 }

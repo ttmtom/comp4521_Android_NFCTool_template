@@ -8,7 +8,11 @@ import android.media.AudioManager;
  * Created by TM on 23-Mar-18.
  */
 
-public class SoundModeAction extends Action{
+public class VibrateModeAction extends Action{
+    public VibrateModeAction(boolean startSetting){
+        super(startSetting);
+    }
+
     @Override
     public void turnOn() {
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
